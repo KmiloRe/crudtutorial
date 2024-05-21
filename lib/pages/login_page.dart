@@ -3,11 +3,12 @@ import 'package:crudtutorial/widgets/my_textfield.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
+  final void Function()? onTap;
+
+  LoginPage({super.key, required this.onTap});
   //controllers
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
-
-  LoginPage({super.key});
 
   //methods
   void login() {
@@ -82,7 +83,7 @@ class LoginPage extends StatelessWidget {
                   children: [
                     Text('No tienes cuenta?'),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: onTap,
                       child: Text('  Registrate aqui',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,

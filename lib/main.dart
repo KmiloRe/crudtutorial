@@ -1,14 +1,11 @@
 import 'package:crudtutorial/firebase_options.dart';
 import 'package:crudtutorial/pages/home_page.dart';
-import 'package:crudtutorial/pages/login_page.dart';
-import 'package:crudtutorial/pages/register_page.dart';
+
+import 'package:crudtutorial/services/auth/login_or_register.dart';
 import 'package:crudtutorial/theme/dark_mode.dart';
 import 'package:crudtutorial/theme/light_mode.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
-import 'package:crudtutorial/theme/dark_mode.dart';
-import 'package:crudtutorial/theme/light_mode.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: const LoginOrRegister(),
       theme: lightMode,
       darkTheme: darkMode,
     );

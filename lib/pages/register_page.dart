@@ -3,13 +3,15 @@ import 'package:crudtutorial/widgets/my_textfield.dart';
 import 'package:flutter/material.dart';
 
 class RegisterPage extends StatelessWidget {
+  final void Function()? onTap;
+
+  RegisterPage({super.key, required this.onTap});
+
   //controllers
   TextEditingController usernamecontroller = TextEditingController();
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
   TextEditingController confirmpasswordcontroller = TextEditingController();
-
-  RegisterPage({super.key});
 
   //methods
   void Register() {
@@ -82,7 +84,7 @@ class RegisterPage extends StatelessWidget {
                   children: [
                     const Text('Ya tienes cuenta?'),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: onTap,
                       child: Text('  Inicia Sesión',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
