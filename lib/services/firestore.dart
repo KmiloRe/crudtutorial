@@ -6,9 +6,9 @@ class FirestoreService {
       FirebaseFirestore.instance.collection('notas');
 
 // * Create: nueva nota
-  Future<void> addNota(String title) async {
+  Future<void> addNota(String nota) async {
     await notas.add({
-      'title': title,
+      'nota': nota,
       'createdAt': FieldValue.serverTimestamp(),
       'localtime': Timestamp.now(),
     });
@@ -24,5 +24,16 @@ class FirestoreService {
 
 // * Update: update nota given a note id
 
+  Future<void> updateNota(String docID, String nota) async {
+    await notas.doc(docID).update({
+      'nota': nota,
+      'updatedAt': FieldValue.serverTimestamp(),
+    });
+  }
+
 // * Delete: delete nota given a note id
+
+  Future<void> deleteNota(String docID) async {
+    await notas.doc(docID).delete();
+  }
 }

@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   final TextEditingController textontroller = TextEditingController();
 
   //open dialog box
-  void openNoteBox() {
+  void openNoteBox({String? docID}) {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -28,8 +28,13 @@ class _HomePageState extends State<HomePage> {
                 //button to guardar
                 ElevatedButton(
                     onPressed: () {
-                      //add nota
-                      FirestoreService().addNota(textontroller.text);
+                      if (docID == null) {
+                        //add nota
+                        FirestoreService().addNota(textontroller.text);
+                      } else {
+                        //update nota
+                        firestoreService.updateNota(docID, textontroller.text);
+                      }
 
                       //clear text controller
                       textontroller.clear();
@@ -72,18 +77,30 @@ class _HomePageState extends State<HomePage> {
                   //get nota from each doc
                   Map<String, dynamic> data =
                       document.data() as Map<String, dynamic>;
-                  String notatexto = data['title'];
+                  String notatexto = data['nota'];
 
                   //display as a list tile
                   return ListTile(
                     title: Text(notatexto),
-                    // trailing: IconButton(
-                    //   icon: const Icon(Icons.delete),
-                    //   onPressed: () {
-                    //     //delete nota
-                    //     firestoreService.deleteNota(docID);
-                    //   },
-                    // ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        //update
+                        IconButton(
+                          icon: const Icon(Icons.edit),
+                          onPressed: () {
+                            //delete nota
+                            // firestoreService.updateNota(docID, 'fd');
+                            openNoteBox(docID: docID);
+                          },
+                        ),
+                        //delete
+                        IconButton(
+                          icon: const Icon(Icons.highlight_remove_sharp),
+                          onPressed: () => firestoreService.deleteNota(docID),
+                        ),
+                      ],
+                    ),
                   );
                 },
               );
