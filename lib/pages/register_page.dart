@@ -1,21 +1,76 @@
+import 'dart:developer';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:crudtutorial/helper_functions/helper_functions.dart';
 import 'package:crudtutorial/widgets/my_button.dart';
 import 'package:crudtutorial/widgets/my_textfield.dart';
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   final void Function()? onTap;
 
-  RegisterPage({super.key, required this.onTap});
+  const RegisterPage({super.key, required this.onTap});
 
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
   //controllers
   TextEditingController usernamecontroller = TextEditingController();
+
   TextEditingController emailcontroller = TextEditingController();
+
   TextEditingController passwordcontroller = TextEditingController();
+
   TextEditingController confirmpasswordcontroller = TextEditingController();
 
   //methods
-  void Register() {
-    //Register logic
+  void registeruser() async {
+    //show loading circle
+    showDialog(
+        context: context,
+        builder: (context) => const CircularProgressIndicator());
+
+    //password matches ?
+    if (passwordcontroller.text != confirmpasswordcontroller.text ||
+        passwordcontroller.text.isEmpty) {
+      //matar loadind circle
+      Navigator.pop(context);
+      //show error message to user
+      displayErrorMessageToUser(context, "Las claves no coinciden");
+
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //     const SnackBar(content: Text('Las claves no coinciden')));
+      return;
+    } else {
+// try creating user
+      try {
+        //create user
+        UserCredential? userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailcontroller.text,
+          password: passwordcontroller.text,
+        );
+        //matar loadind circle
+        Navigator.pop(context);
+      } on FirebaseAuthException catch (e) {
+        // // if (e.code == 'weak-password') {
+        // //   log('The password provided is too weak.');
+        // //   displayErrorMessageToUser(context, "La clave es muy débil");
+        // // } else if (e.code == 'email-already-in-use') {
+        // //   print('The account already exists for that email.');
+        // //   displayErrorMessageToUser(
+        // //       context, "La cuenta ya existe para ese correo");
+        // // }
+
+        //matar loadind circle
+        Navigator.pop(context);
+        //display error message to user
+        displayErrorMessageToUser(context, e.code);
+        //log error
+        log(e.toString());
+      }
+    }
   }
 
   @override
@@ -54,7 +109,7 @@ class RegisterPage extends StatelessWidget {
                 MyTextField(
                     hintText: 'Tu nombre de usuario',
                     obscureText: false,
-                    controller: emailcontroller),
+                    controller: usernamecontroller),
                 const SizedBox(height: 20),
                 //* email
                 MyTextField(
@@ -76,7 +131,7 @@ class RegisterPage extends StatelessWidget {
 
                 const SizedBox(height: 20),
                 //* Register button
-                Mybutton(text: 'Registrarme', onTap: Register),
+                Mybutton(text: 'Registrarme', onTap: registeruser),
 
                 const SizedBox(height: 20),
                 //* login button
@@ -84,7 +139,7 @@ class RegisterPage extends StatelessWidget {
                   children: [
                     const Text('Ya tienes cuenta?'),
                     GestureDetector(
-                      onTap: onTap,
+                      onTap: widget.onTap,
                       child: Text('  Inicia Sesión',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
