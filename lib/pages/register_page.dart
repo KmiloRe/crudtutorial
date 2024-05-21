@@ -2,16 +2,18 @@ import 'package:crudtutorial/widgets/my_button.dart';
 import 'package:crudtutorial/widgets/my_textfield.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class RegisterPage extends StatelessWidget {
   //controllers
+  TextEditingController usernamecontroller = TextEditingController();
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passwordcontroller = TextEditingController();
+  TextEditingController confirmpasswordcontroller = TextEditingController();
 
-  LoginPage({super.key});
+  RegisterPage({super.key});
 
   //methods
-  void login() {
-    //login logic
+  void Register() {
+    //Register logic
   }
 
   @override
@@ -46,6 +48,12 @@ class LoginPage extends StatelessWidget {
                     fontSize: 20,
                   ),
                 ),
+                //* username
+                MyTextField(
+                    hintText: 'Tu nombre de usuario',
+                    obscureText: false,
+                    controller: emailcontroller),
+                const SizedBox(height: 20),
                 //* email
                 MyTextField(
                     hintText: 'Tu correo',
@@ -57,53 +65,32 @@ class LoginPage extends StatelessWidget {
                     hintText: 'Clave 1',
                     obscureText: true,
                     controller: passwordcontroller),
+                const SizedBox(height: 20),
+                //* confirm password
+                MyTextField(
+                    hintText: 'Confirma tu clave 1',
+                    obscureText: true,
+                    controller: confirmpasswordcontroller),
 
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
+                //* Register button
+                Mybutton(text: 'Registrarme', onTap: Register),
 
-                //* olvidaste tu contraseña
-                Row(
-                  children: [
-                    const SizedBox(width: 5),
-                    Text(
-                      'Olvidaste tu contraseña?',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
-                      ),
-                    ),
-                  ],
-                ),
                 const SizedBox(height: 20),
                 //* login button
-                Mybutton(text: 'Iniciar sesión', onTap: login),
-
-                const SizedBox(height: 20),
-                //* register button
                 Row(
                   children: [
-                    Text('No tienes cuenta?'),
+                    const Text('Ya tienes cuenta?'),
                     GestureDetector(
                       onTap: () {},
-                      child: Text('  Registrate aqui',
+                      child: Text('  Inicia Sesión',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Theme.of(context).colorScheme.tertiary)),
                     ),
                   ],
                 ),
-              ]
-
-              //* app name
-
-              //* email
-
-              //* password
-
-              //* olvidaste tu contraseña
-
-              //* login button
-
-              //* register button
-              ),
+              ]),
         ),
       ),
     );

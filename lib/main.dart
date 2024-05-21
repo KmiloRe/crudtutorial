@@ -1,6 +1,7 @@
 import 'package:crudtutorial/firebase_options.dart';
 import 'package:crudtutorial/pages/home_page.dart';
 import 'package:crudtutorial/pages/login_page.dart';
+import 'package:crudtutorial/pages/register_page.dart';
 import 'package:crudtutorial/theme/dark_mode.dart';
 import 'package:crudtutorial/theme/light_mode.dart';
 import 'package:firebase_core/firebase_core.dart';

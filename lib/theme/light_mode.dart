@@ -6,7 +6,8 @@ ThemeData lightMode = ThemeData(
     surface: Colors.grey.shade300,
     primary: Colors.grey.shade200,
     secondary: Colors.grey.shade400,
-    inversePrimary: Colors.grey.shade800,
+    inversePrimary: Colors.grey.shade600,
+    tertiary: Colors.lightBlue.shade900,
   ),
   textTheme: ThemeData.light().textTheme.apply(
         fontFamily: 'Open Sans',

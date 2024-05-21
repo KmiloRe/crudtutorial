@@ -7,6 +7,7 @@ ThemeData darkMode = ThemeData(
     primary: Colors.grey.shade800,
     secondary: Colors.grey.shade700,
     inversePrimary: Colors.grey.shade300,
+    tertiary: Colors.lightBlue.shade100,
   ),
   textTheme: ThemeData.dark().textTheme.apply(
         //todo change font family
