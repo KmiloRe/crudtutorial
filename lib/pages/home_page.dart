@@ -60,57 +60,62 @@ class _HomePageState extends State<HomePage> {
         },
         child: const Icon(Icons.add),
       ),
-      body: StreamBuilder<QuerySnapshot>(
-          stream: firestoreService.getNotasStream(),
-          builder: ((context, snapshot) {
-            //if hay datos, get all
-            if (snapshot.hasData) {
-              List notasList = snapshot.data!.docs;
-              //mostrar como lista
-              return ListView.builder(
-                itemCount: notasList.length,
-                itemBuilder: (context, index) {
-                  //get each individual doc
-                  DocumentSnapshot document = notasList[index];
-                  String docID = document.id;
+      body: Stack(
+        children: [
+          StreamBuilder<QuerySnapshot>(
+              stream: firestoreService.getNotasStream(),
+              builder: ((context, snapshot) {
+                //if hay datos, get all
+                if (snapshot.hasData) {
+                  List notasList = snapshot.data!.docs;
+                  //mostrar como lista
+                  return ListView.builder(
+                    itemCount: notasList.length,
+                    itemBuilder: (context, index) {
+                      //get each individual doc
+                      DocumentSnapshot document = notasList[index];
+                      String docID = document.id;
 
-                  //get nota from each doc
-                  Map<String, dynamic> data =
-                      document.data() as Map<String, dynamic>;
-                  String notatexto = data['nota'];
+                      //get nota from each doc
+                      Map<String, dynamic> data =
+                          document.data() as Map<String, dynamic>;
+                      String notatexto = data['nota'];
 
-                  //display as a list tile
-                  return ListTile(
-                    title: Text(notatexto),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        //update
-                        IconButton(
-                          icon: const Icon(Icons.edit),
-                          onPressed: () {
-                            //delete nota
-                            // firestoreService.updateNota(docID, 'fd');
-                            openNoteBox(docID: docID);
-                          },
+                      //display as a list tile
+                      return ListTile(
+                        title: Text(notatexto),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            //update
+                            IconButton(
+                              icon: const Icon(Icons.edit),
+                              onPressed: () {
+                                //delete nota
+                                // firestoreService.updateNota(docID, 'fd');
+                                openNoteBox(docID: docID);
+                              },
+                            ),
+                            //delete
+                            IconButton(
+                              icon: const Icon(Icons.highlight_remove_sharp),
+                              onPressed: () =>
+                                  firestoreService.deleteNota(docID),
+                            ),
+                          ],
                         ),
-                        //delete
-                        IconButton(
-                          icon: const Icon(Icons.highlight_remove_sharp),
-                          onPressed: () => firestoreService.deleteNota(docID),
-                        ),
-                      ],
-                    ),
+                      );
+                    },
                   );
-                },
-              );
-            }
-            //if no data, return nothing
-            else {
-              //show text widget
-              return const Text('No hay notas');
-            }
-          })),
+                }
+                //if no data, return nothing
+                else {
+                  //show text widget
+                  return const Text('No hay notas');
+                }
+              })),
+        ],
+      ),
     );
   }
 }

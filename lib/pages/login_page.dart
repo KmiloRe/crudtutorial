@@ -1,17 +1,48 @@
+import 'dart:ui';
+
+import 'package:crudtutorial/helper_functions/helper_functions.dart';
 import 'package:crudtutorial/widgets/my_button.dart';
 import 'package:crudtutorial/widgets/my_textfield.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   final void Function()? onTap;
 
   LoginPage({super.key, required this.onTap});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   //controllers
   TextEditingController emailcontroller = TextEditingController();
+
   TextEditingController passwordcontroller = TextEditingController();
 
   //methods
-  void login() {
+  void login() async {
+    //show loading circle
+    showDialog(
+        context: context,
+        builder: (context) => const CircularProgressIndicator());
+
+    //try sign in
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailcontroller.text,
+        password: passwordcontroller.text,
+      );
+      //matar loadind circle
+      if (context.mounted) Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      //matar loadind circle
+      Navigator.pop(context);
+      //show error message to user
+      displayErrorMessageToUser(context, e.code);
+    }
+
     //login logic
   }
 
@@ -83,7 +114,7 @@ class LoginPage extends StatelessWidget {
                   children: [
                     Text('No tienes cuenta?'),
                     GestureDetector(
-                      onTap: onTap,
+                      onTap: widget.onTap,
                       child: Text('  Registrate aqui',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
