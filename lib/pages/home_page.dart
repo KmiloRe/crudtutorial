@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crudtutorial/services/firestore.dart';
+import 'package:crudtutorial/widgets/my_drawer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 //firesotre service
@@ -15,6 +18,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   //text controller
   final TextEditingController textontroller = TextEditingController();
+
+  void logout() {
+    FirebaseAuth.instance.signOut();
+  }
 
   //open dialog box
   void openNoteBox({String? docID}) {
@@ -60,6 +67,7 @@ class _HomePageState extends State<HomePage> {
         },
         child: const Icon(Icons.add),
       ),
+      drawer: MyDrawer(),
       body: Stack(
         children: [
           StreamBuilder<QuerySnapshot>(
@@ -114,6 +122,26 @@ class _HomePageState extends State<HomePage> {
                   return const Text('No hay notas');
                 }
               })),
+          Positioned(
+            top: 24.0,
+            left: 0.0,
+            right: 120.0,
+            child: GestureDetector(
+              onTap: () {
+                //todo: cambiar logout de aca a otro lado
+                logout();
+                // ScaffoldMessenger.of(context).showSnackBar(
+                //     const SnackBar(content: Text('Image Clicked!')));
+              },
+              child: const SizedBox(
+                // width: 200,
+                // height: 200,
+                child: Image(
+                    image: AssetImage('assets/logoByHam.png'),
+                    fit: BoxFit.cover),
+              ),
+            ),
+          ),
         ],
       ),
     );
