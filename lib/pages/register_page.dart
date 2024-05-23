@@ -1,5 +1,7 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:crudtutorial/helper_functions/helper_functions.dart';
 import 'package:crudtutorial/widgets/my_button.dart';
 import 'package:crudtutorial/widgets/my_textfield.dart';
@@ -45,12 +47,15 @@ class _RegisterPageState extends State<RegisterPage> {
     } else {
 // try creating user
       try {
-        //create user
+        //create user auth
         UserCredential? userCredential =
             await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailcontroller.text,
           password: passwordcontroller.text,
         );
+        //create user document in firestore database
+        createUserDocument(userCredential);
+
         //matar loadind circle
         Navigator.pop(context);
       } on FirebaseAuthException catch (e) {
@@ -70,6 +75,19 @@ class _RegisterPageState extends State<RegisterPage> {
         //log error
         log(e.toString());
       }
+    }
+  }
+
+  //create user document and collect them in firestore
+  Future<void> createUserDocument(UserCredential? userCredential) async {
+    if (userCredential != null && userCredential.user != null) {
+      await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(userCredential.user!.email)
+          .set({
+        'username': usernamecontroller.text,
+        'email': userCredential.user!.email,
+      });
     }
   }
 

@@ -19,10 +19,6 @@ class _HomePageState extends State<HomePage> {
   //text controller
   final TextEditingController textontroller = TextEditingController();
 
-  void logout() {
-    FirebaseAuth.instance.signOut();
-  }
-
   //open dialog box
   void openNoteBox({String? docID}) {
     showDialog(
@@ -129,7 +125,7 @@ class _HomePageState extends State<HomePage> {
             child: GestureDetector(
               onTap: () {
                 //todo: cambiar logout de aca a otro lado
-                logout();
+
                 // ScaffoldMessenger.of(context).showSnackBar(
                 //     const SnackBar(content: Text('Image Clicked!')));
               },

@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
+
+  void logout() {
+    FirebaseAuth.instance.signOut();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +60,7 @@ class MyDrawer extends StatelessWidget {
                   title: const Text('P E R F I L'),
                   onTap: () {
                     Navigator.pop(context);
-                    //Navigator.pushNamed(context, '/profile');
+                    Navigator.pushNamed(context, '/profile');
                   },
                 ),
               ),
@@ -69,7 +73,7 @@ class MyDrawer extends StatelessWidget {
                   title: const Text('U S U A R I O S'),
                   onTap: () {
                     Navigator.pop(context);
-                    //Navigator.pushNamed(context, '/users');
+                    Navigator.pushNamed(context, '/users');
                   },
                 ),
               ),
@@ -82,7 +86,8 @@ class MyDrawer extends StatelessWidget {
               leading: const Icon(Icons.logout),
               title: const Text('C E R R A R  S E S I O N'),
               onTap: () {
-                //todo cerrar sesion
+                Navigator.pop(context);
+                logout();
               },
             ),
           ),

@@ -1,5 +1,7 @@
 import 'package:crudtutorial/firebase_options.dart';
 import 'package:crudtutorial/pages/home_page.dart';
+import 'package:crudtutorial/pages/profile_page.dart';
+import 'package:crudtutorial/pages/users_page.dart';
 import 'package:crudtutorial/services/auth/auth.dart';
 
 import 'package:crudtutorial/services/auth/login_or_register.dart';
@@ -24,6 +26,13 @@ class MyApp extends StatelessWidget {
       home: const AuthPage(),
       theme: lightMode,
       darkTheme: darkMode,
+      routes: {
+        '/login': (context) => const LoginOrRegister(),
+        '/register': (context) => const AuthPage(),
+        '/profile': (context) => ProfilePage(),
+        '/home': (context) => const HomePage(),
+        '/users': (context) => const UsersPage(),
+      },
     );
   }
 }
