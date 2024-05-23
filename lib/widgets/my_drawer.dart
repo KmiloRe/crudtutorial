@@ -88,6 +88,7 @@ class MyDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.pop(context);
                 logout();
+                Navigator.pushNamed(context, '/login');
               },
             ),
           ),
