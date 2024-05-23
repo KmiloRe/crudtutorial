@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crudtutorial/widgets/my_drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +25,10 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
+      drawer: MyDrawer(),
+      appBar: AppBar(
+        title: const Text('Profile Page'),
+      ),
       body: FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
         future: getUserDetails(),
         builder: (context, snapshot) {
@@ -42,11 +47,13 @@ class ProfilePage extends StatelessWidget {
             //extraer data
             Map<String, dynamic>? user = snapshot.data!.data();
 
-            return Column(
-              children: [
-                Text('Username: ${user!['username']}'),
-                Text('Email: ${user['email']}'),
-              ],
+            return Center(
+              child: Column(
+                children: [
+                  Text('Username: ${user!['username']}'),
+                  Text('Email: ${user['email']}'),
+                ],
+              ),
             );
           } else {
             return const Text("No data");
