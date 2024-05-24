@@ -13,7 +13,7 @@ class ProfilePage extends StatelessWidget {
   Future<DocumentSnapshot<Map<String, dynamic>>> getUserDetails() async {
     return await FirebaseFirestore.instance
         .collection('Users')
-        .doc(currentUser!.email)
+        .doc(currentUser!.uid)
         .get();
   }
 

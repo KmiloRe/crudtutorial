@@ -1,10 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 //todo: change esto a notas por uid
 class FirestoreService {
-//get collection of notes
+// * get collection of notes
   final CollectionReference notas =
       FirebaseFirestore.instance.collection('notas');
+
+// * Get current user
+  User? user = FirebaseAuth.instance.currentUser;
 
 // * Create: nueva nota
   Future<void> addNota(String nota) async {
