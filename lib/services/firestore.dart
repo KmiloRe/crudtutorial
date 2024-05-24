@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+//todo: change esto a notas por uid
 class FirestoreService {
 //get collection of notes
   final CollectionReference notas =

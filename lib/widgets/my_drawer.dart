@@ -48,6 +48,7 @@ class MyDrawer extends StatelessWidget {
                   onTap: () {
                     //*Estamos ya en el home
                     Navigator.pop(context);
+                    Navigator.pushNamed(context, '/home');
                   },
                 ),
               ),
