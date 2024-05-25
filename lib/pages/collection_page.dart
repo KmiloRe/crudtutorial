@@ -1,4 +1,5 @@
 import 'package:crudtutorial/widgets/my_drawer.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Mycollection extends StatefulWidget {
@@ -39,8 +40,11 @@ class GridB extends StatefulWidget {
 }
 
 class _GridBState extends State<GridB> {
+  //todo: metodo de onpressed para cada item (si ya esta seleccionado eliminar de mycollection, si no agregar a mycollection)
+
   //todo Obtener datos de firebase
   //todo: que las imagenes sean links a storage de firebase
+  //*collection (title: String, año: String, fabricante: String, image: url)
   final List<Map<String, dynamic>> gridMap = [
     //cabe aclarar que no tenemos licensias de las imagenes mostradas
 
@@ -55,6 +59,102 @@ class _GridBState extends State<GridB> {
       "price": "000195443",
       "images": "assets/logoByHam.png",
       "mail": "camilo.restrepor@upb.edu.co",
+    },
+    {
+      "title": "Sebastian Rtpo",
+      "price": "000195443",
+      "images": "assets/logoByHam.png",
+      "mail": "sebastian.restrepoj@upb.edu.co",
+    },
+    {
+      "title": "Sebastian Rtpo",
+      "price": "000195443",
+      "images": "assets/logoByHam.png",
+      "mail": "sebastian.restrepoj@upb.edu.co",
+    },
+    {
+      "title": "Sebastian Rtpo",
+      "price": "000195443",
+      "images": "assets/logoByHam.png",
+      "mail": "sebastian.restrepoj@upb.edu.co",
+    },
+    {
+      "title": "Sebastian Rtpo",
+      "price": "000195443",
+      "images": "assets/logoByHam.png",
+      "mail": "sebastian.restrepoj@upb.edu.co",
+    },
+    {
+      "title": "Sebastian Rtpo",
+      "price": "000195443",
+      "images": "assets/logoByHam.png",
+      "mail": "sebastian.restrepoj@upb.edu.co",
+    },
+    {
+      "title": "Sebastian Rtpo",
+      "price": "000195443",
+      "images": "assets/logoByHam.png",
+      "mail": "sebastian.restrepoj@upb.edu.co",
+    },
+    {
+      "title": "Sebastian Rtpo",
+      "price": "000195443",
+      "images": "assets/logoByHam.png",
+      "mail": "sebastian.restrepoj@upb.edu.co",
+    },
+    {
+      "title": "Sebastian Rtpo",
+      "price": "000195443",
+      "images": "assets/logoByHam.png",
+      "mail": "sebastian.restrepoj@upb.edu.co",
+    },
+    {
+      "title": "Sebastian Rtpo",
+      "price": "000195443",
+      "images": "assets/logoByHam.png",
+      "mail": "sebastian.restrepoj@upb.edu.co",
+    },
+    {
+      "title": "Sebastian Rtpo",
+      "price": "000195443",
+      "images": "assets/logoByHam.png",
+      "mail": "sebastian.restrepoj@upb.edu.co",
+    },
+    {
+      "title": "Sebastian Rtpo",
+      "price": "000195443",
+      "images": "assets/logoByHam.png",
+      "mail": "sebastian.restrepoj@upb.edu.co",
+    },
+    {
+      "title": "Sebastian Rtpo",
+      "price": "000195443",
+      "images": "assets/logoByHam.png",
+      "mail": "sebastian.restrepoj@upb.edu.co",
+    },
+    {
+      "title": "Sebastian Rtpo",
+      "price": "000195443",
+      "images": "assets/logoByHam.png",
+      "mail": "sebastian.restrepoj@upb.edu.co",
+    },
+    {
+      "title": "Sebastian Rtpo",
+      "price": "000195443",
+      "images": "assets/logoByHam.png",
+      "mail": "sebastian.restrepoj@upb.edu.co",
+    },
+    {
+      "title": "Sebastian Rtpo",
+      "price": "000195443",
+      "images": "assets/logoByHam.png",
+      "mail": "sebastian.restrepoj@upb.edu.co",
+    },
+    {
+      "title": "Sebastian Rtpo",
+      "price": "000195443",
+      "images": "assets/logoByHam.png",
+      "mail": "sebastian.restrepoj@upb.edu.co",
     },
     {
       "title": "Sebastian Rtpo",
@@ -142,17 +242,12 @@ class _GridBState extends State<GridB> {
                     //   ),
                     // ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
                           onPressed: () {},
                           icon: const Icon(
-                            Icons.menu_book_sharp,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.monetization_on_outlined,
+                            CupertinoIcons.heart,
                           ),
                         ),
                       ],
