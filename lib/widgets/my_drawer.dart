@@ -78,6 +78,18 @@ class MyDrawer extends StatelessWidget {
                   },
                 ),
               ),
+              //Collection
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListTile(
+                  leading: const Icon(Icons.people),
+                  title: const Text('C O L E C C I O N'),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, '/mycollection');
+                  },
+                ),
+              ),
             ],
           ),
           //logout

@@ -8,6 +8,8 @@ ThemeData darkMode = ThemeData(
     secondary: Colors.grey.shade700,
     inversePrimary: Colors.grey.shade300,
     tertiary: Colors.lightBlue.shade100,
+    primaryContainer: const Color(0xFFC40233),
+    secondaryContainer: const Color(0xFF1B1B1B),
   ),
   textTheme: ThemeData.dark().textTheme.apply(
         //todo change font family
