@@ -1,4 +1,5 @@
 import 'package:crudtutorial/firebase_options.dart';
+import 'package:crudtutorial/pages/change_password.dart';
 import 'package:crudtutorial/pages/home_page.dart';
 import 'package:crudtutorial/pages/profile_page.dart';
 import 'package:crudtutorial/pages/users_page.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         '/profile': (context) => ProfilePage(),
         '/home': (context) => const HomePage(),
         '/users': (context) => const UsersPage(),
+        '/changepassword': (context) => const ChangePassword(),
       },
     );
   }

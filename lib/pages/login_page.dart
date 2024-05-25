@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class LoginPage extends StatefulWidget {
   final void Function()? onTap;
 
-  LoginPage({super.key, required this.onTap});
+  const LoginPage({super.key, required this.onTap});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.surface,
-      body: Center(
+      body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -63,8 +63,8 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Image Clicked!')));
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(const SnackBar(content: Text('Hola!')));
                   },
                   child: const SizedBox(
                     width: 200,
@@ -100,10 +100,15 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   children: [
                     const SizedBox(width: 5),
-                    Text(
-                      'Olvidaste tu contraseña?',
-                      style: TextStyle(
-                        color: Theme.of(context).colorScheme.secondary,
+                    GestureDetector(
+                      onDoubleTap: () {
+                        Navigator.pushNamed(context, '/changepassword');
+                      },
+                      child: Text(
+                        'Olvidaste tu contraseña?',
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.secondary,
+                        ),
                       ),
                     ),
                   ],
@@ -116,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
                 //* register button
                 Row(
                   children: [
-                    Text('No tienes cuenta?'),
+                    const Text('No tienes cuenta?'),
                     GestureDetector(
                       onTap: widget.onTap,
                       child: Text('  Registrate aqui',
@@ -126,20 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
-              ]
-
-              //* app name
-
-              //* email
-
-              //* password
-
-              //* olvidaste tu contraseña
-
-              //* login button
-
-              //* register button
-              ),
+              ]),
         ),
       ),
     );
