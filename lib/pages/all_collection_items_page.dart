@@ -40,11 +40,9 @@ class GridB extends StatefulWidget {
 }
 
 class _GridBState extends State<GridB> {
-  //todo: metodo de onpressed para cada item (si ya esta seleccionado eliminar de mycollection, si no agregar a mycollection)
-
-  //todo Obtener datos de firebase
-  //todo: que las imagenes sean links a storage de firebase
+//todo: vista de admin donde cree nuevos items (debera subir imagen y campos de texto)
   //*collection (title: String, año: String, fabricante: String, image: url)
+
   final List<Map<String, dynamic>> gridMap = [
     //cabe aclarar que no tenemos licensias de las imagenes mostradas
 
@@ -59,108 +57,6 @@ class _GridBState extends State<GridB> {
       "price": "000195443",
       "images": "assets/logoByHam.png",
       "mail": "camilo.restrepor@upb.edu.co",
-    },
-    {
-      "title": "Sebastian Rtpo",
-      "price": "000195443",
-      "images": "assets/logoByHam.png",
-      "mail": "sebastian.restrepoj@upb.edu.co",
-    },
-    {
-      "title": "Sebastian Rtpo",
-      "price": "000195443",
-      "images": "assets/logoByHam.png",
-      "mail": "sebastian.restrepoj@upb.edu.co",
-    },
-    {
-      "title": "Sebastian Rtpo",
-      "price": "000195443",
-      "images": "assets/logoByHam.png",
-      "mail": "sebastian.restrepoj@upb.edu.co",
-    },
-    {
-      "title": "Sebastian Rtpo",
-      "price": "000195443",
-      "images": "assets/logoByHam.png",
-      "mail": "sebastian.restrepoj@upb.edu.co",
-    },
-    {
-      "title": "Sebastian Rtpo",
-      "price": "000195443",
-      "images": "assets/logoByHam.png",
-      "mail": "sebastian.restrepoj@upb.edu.co",
-    },
-    {
-      "title": "Sebastian Rtpo",
-      "price": "000195443",
-      "images": "assets/logoByHam.png",
-      "mail": "sebastian.restrepoj@upb.edu.co",
-    },
-    {
-      "title": "Sebastian Rtpo",
-      "price": "000195443",
-      "images": "assets/logoByHam.png",
-      "mail": "sebastian.restrepoj@upb.edu.co",
-    },
-    {
-      "title": "Sebastian Rtpo",
-      "price": "000195443",
-      "images": "assets/logoByHam.png",
-      "mail": "sebastian.restrepoj@upb.edu.co",
-    },
-    {
-      "title": "Sebastian Rtpo",
-      "price": "000195443",
-      "images": "assets/logoByHam.png",
-      "mail": "sebastian.restrepoj@upb.edu.co",
-    },
-    {
-      "title": "Sebastian Rtpo",
-      "price": "000195443",
-      "images": "assets/logoByHam.png",
-      "mail": "sebastian.restrepoj@upb.edu.co",
-    },
-    {
-      "title": "Sebastian Rtpo",
-      "price": "000195443",
-      "images": "assets/logoByHam.png",
-      "mail": "sebastian.restrepoj@upb.edu.co",
-    },
-    {
-      "title": "Sebastian Rtpo",
-      "price": "000195443",
-      "images": "assets/logoByHam.png",
-      "mail": "sebastian.restrepoj@upb.edu.co",
-    },
-    {
-      "title": "Sebastian Rtpo",
-      "price": "000195443",
-      "images": "assets/logoByHam.png",
-      "mail": "sebastian.restrepoj@upb.edu.co",
-    },
-    {
-      "title": "Sebastian Rtpo",
-      "price": "000195443",
-      "images": "assets/logoByHam.png",
-      "mail": "sebastian.restrepoj@upb.edu.co",
-    },
-    {
-      "title": "Sebastian Rtpo",
-      "price": "000195443",
-      "images": "assets/logoByHam.png",
-      "mail": "sebastian.restrepoj@upb.edu.co",
-    },
-    {
-      "title": "Sebastian Rtpo",
-      "price": "000195443",
-      "images": "assets/logoByHam.png",
-      "mail": "sebastian.restrepoj@upb.edu.co",
-    },
-    {
-      "title": "Sebastian Rtpo",
-      "price": "000195443",
-      "images": "assets/logoByHam.png",
-      "mail": "sebastian.restrepoj@upb.edu.co",
     }
   ];
 
@@ -187,8 +83,8 @@ class _GridBState extends State<GridB> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
+              const ClipRRect(
+                borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(16.0),
                   topRight: Radius.circular(16.0),
                 ),
@@ -204,7 +100,9 @@ class _GridBState extends State<GridB> {
                 */
                 //Imagen local
                 child: Image(
-                  image: AssetImage("${gridMap.elementAt(index)['images']}"),
+                  //image: AssetImage("${gridMap.elementAt(index)['images']}"),
+                  image: AssetImage("assets/logoByHam.png"),
+
                   height: 170,
                   width: 170,
                   fit: BoxFit.cover,
