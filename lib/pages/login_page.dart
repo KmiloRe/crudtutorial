@@ -56,7 +56,7 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.only(top: 150.0, left: 20, right: 20),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               //*logo

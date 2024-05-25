@@ -1,21 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crudtutorial/pages/home_page.dart';
 import 'package:crudtutorial/widgets/my_drawer.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:crudtutorial/services/firestore.dart';
 
 class ProfilePage extends StatelessWidget {
   ProfilePage({super.key});
 
-  //current logged in user
-  User? currentUser = FirebaseAuth.instance.currentUser;
+  // //current logged in user
+  // User? currentUser = FirebaseAuth.instance.currentUser;
 
-  //future to fetch user data
-  Future<DocumentSnapshot<Map<String, dynamic>>> getUserDetails() async {
-    return await FirebaseFirestore.instance
-        .collection('Users')
-        .doc(currentUser!.uid)
-        .get();
-  }
+  // //future to fetch user data
+  // Future<DocumentSnapshot<Map<String, dynamic>>> getUserDetails() async {
+  //   return await FirebaseFirestore.instance
+  //       .collection('Users')
+  //       .doc(currentUser!.uid)
+  //       .get();
+  // }
 
   //todo: a futuro guardar esa data en un
   //todo estado para no tener que hacer la peticion cada vez que se renderiza la pagina
@@ -30,7 +32,7 @@ class ProfilePage extends StatelessWidget {
         title: const Text('Profile Page'),
       ),
       body: FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-        future: getUserDetails(),
+        future: firestoreService.getUserDetails(),
         builder: (context, snapshot) {
           //loading circle
           if (snapshot.connectionState == ConnectionState.waiting) {

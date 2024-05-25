@@ -3,14 +3,23 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 //todo: change esto a notas por uid
 class FirestoreService {
+  //current logged in user
+
+  // * Get current user
+  User? user = FirebaseAuth.instance.currentUser;
+
+  Future<DocumentSnapshot<Map<String, dynamic>>> getUserDetails() async {
+    return await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(user!.uid)
+        .get();
+  }
+
 // * get collection of notes
   final CollectionReference notas =
       FirebaseFirestore.instance.collection('notas');
   final CollectionReference _usersCollection =
       FirebaseFirestore.instance.collection('Users');
-
-// * Get current user
-  User? user = FirebaseAuth.instance.currentUser;
 
   // get the notas collection for the current user
   //user id
