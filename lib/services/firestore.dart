@@ -6,13 +6,23 @@ class FirestoreService {
 // * get collection of notes
   final CollectionReference notas =
       FirebaseFirestore.instance.collection('notas');
+  final CollectionReference _usersCollection =
+      FirebaseFirestore.instance.collection('Users');
 
 // * Get current user
   User? user = FirebaseAuth.instance.currentUser;
 
+  // get the notas collection for the current user
+  //user id
+
+  CollectionReference get notasCollection {
+    return _usersCollection.doc(user!.uid).collection('Mynotas');
+  }
+
 // * Create: nueva nota
   Future<void> addNota(String nota) async {
-    await notas.add({
+    // DocumentSnapshot<Object?>? data = await _usersCollection.doc(id).get();
+    await notasCollection.add({
       'nota': nota,
       'createdAt': FieldValue.serverTimestamp(),
       'localtime': Timestamp.now(),
@@ -22,7 +32,7 @@ class FirestoreService {
 // * Read: get notas
   Stream<QuerySnapshot> getNotasStream() {
     final notasStream =
-        notas.orderBy('createdAt', descending: true).snapshots();
+        notasCollection.orderBy('createdAt', descending: true).snapshots();
 
     return notasStream;
   }
@@ -30,7 +40,7 @@ class FirestoreService {
 // * Update: update nota given a note id
 
   Future<void> updateNota(String docID, String nota) async {
-    await notas.doc(docID).update({
+    await notasCollection.doc(docID).update({
       'nota': nota,
       'updatedAt': FieldValue.serverTimestamp(),
     });
