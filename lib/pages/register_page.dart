@@ -45,7 +45,7 @@ class _RegisterPageState extends State<RegisterPage> {
       //     const SnackBar(content: Text('Las claves no coinciden')));
       return;
     } else {
-// try creating user
+      // try creating user
       try {
         //create user auth
         UserCredential? userCredential =

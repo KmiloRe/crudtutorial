@@ -16,8 +16,8 @@ class FirestoreService {
   }
 
 // * get collection of notes
-  final CollectionReference notas =
-      FirebaseFirestore.instance.collection('notas');
+  final CollectionReference posts =
+      FirebaseFirestore.instance.collection('posts');
   final CollectionReference _usersCollection =
       FirebaseFirestore.instance.collection('Users');
 
@@ -58,6 +58,48 @@ class FirestoreService {
 // * Delete: delete nota given a note id
 
   Future<void> deleteNota(String docID) async {
-    await notas.doc(docID).delete();
+    await notasCollection.doc(docID).delete();
+  }
+
+//todo  Posts de mi grupo:
+
+//* Create: nuevo post en grupo
+  Future<void> addPost(String post) async {
+    // DocumentSnapshot<Object?>? data = await _usersCollection.doc(id).get();
+    await posts.add({
+      'nota': post,
+
+      //? 4jose: Que es el ! ???
+      'owner': user!.uid,
+      'createdAt': FieldValue.serverTimestamp(),
+      'localtime': Timestamp.now(),
+    });
+  }
+
+//* Read: get posts de mi grupo
+
+  Stream<QuerySnapshot> getPostsStream() {
+    final notasStream =
+        posts.orderBy('createdAt', descending: true).snapshots();
+
+    return notasStream;
+  }
+
+//* Update: update post en grupo
+
+  Future<void> updatePost(String docID, String nota) async {
+    await posts.doc(docID).update({
+      'nota': nota,
+      'updatedAt': FieldValue.serverTimestamp(),
+    });
+  }
+
+//* Delete: delete post en grupo
+//todo: Security rule, solo el creador del post puede borrarlo
+  Future<void> deletePost(String docID, String owner) async {
+    // if(user!.uid == owner){
+
+    // }
+    await posts.doc(docID).delete();
   }
 }
