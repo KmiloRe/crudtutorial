@@ -16,6 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool isVisibel = false;
   //text controller
   final TextEditingController textontroller = TextEditingController();
 
@@ -63,7 +64,7 @@ class _HomePageState extends State<HomePage> {
         },
         child: const Icon(Icons.add),
       ),
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
       body: Stack(
         children: [
           StreamBuilder<QuerySnapshot>(
@@ -118,23 +119,29 @@ class _HomePageState extends State<HomePage> {
                   return const Text('No hay notas');
                 }
               })),
-          Positioned(
-            top: 24.0,
-            left: 0.0,
-            right: 120.0,
-            child: GestureDetector(
-              onTap: () {
-                //todo: cambiar logout de aca a otro lado
+          Visibility(
+            visible: !isVisibel,
+            child: Positioned(
+              top: 24.0,
+              left: 0.0,
+              right: 120.0,
+              child: GestureDetector(
+                onTap: () {
+                  //todo: cambiar logout de aca a otro lado
+                  setState(() {
+                    isVisibel = !isVisibel;
+                  });
 
-                // ScaffoldMessenger.of(context).showSnackBar(
-                //     const SnackBar(content: Text('Image Clicked!')));
-              },
-              child: const SizedBox(
-                // width: 200,
-                // height: 200,
-                child: Image(
-                    image: AssetImage('assets/logoByHam.png'),
-                    fit: BoxFit.cover),
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //     const SnackBar(content: Text('Image Clicked!')));
+                },
+                child: const SizedBox(
+                  // width: 200,
+                  // height: 200,
+                  child: Image(
+                      image: AssetImage('assets/logoByHam.png'),
+                      fit: BoxFit.cover),
+                ),
               ),
             ),
           ),
